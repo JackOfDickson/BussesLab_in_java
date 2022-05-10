@@ -7,11 +7,14 @@ public class BusTest {
 
     private Bus bus;
     private Person person;
+    private BusStop busStop;
 
     @Before
     public void before(){
         bus = new Bus("Edinburgh", 4);
         person = new Person();
+        busStop = new BusStop("Morries");
+        busStop.addToQueue(person);
     }
 
     @Test
@@ -40,6 +43,12 @@ public class BusTest {
         bus.addPassenger(person);
         bus.addPassenger(person);
         bus.removePassenger();
+        assertEquals(1, bus.numberOfPassengers());
+    }
+
+    @Test
+    public void canPickUpPassengersFromBusStop(){
+        bus.pickUpPassenger(busStop);
         assertEquals(1, bus.numberOfPassengers());
     }
 
